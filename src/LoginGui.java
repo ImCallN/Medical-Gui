@@ -15,7 +15,6 @@ public class LoginGui implements ActionListener
     private JButton guestButton, loginButton, loginScreenLoginButton, loginScreenBackButton;
     private CardLayout cards;
     
-
     //var to track what screen we are in
     private boolean promptScreen = true;
 
@@ -26,19 +25,6 @@ public class LoginGui implements ActionListener
     {
 
     }
-
-    //Method to open a gui based on a boolean but it wasn't working, come back to this later
-    private static void goToNextGui(boolean access)
-    {
-        if(access)
-        {
-            System.out.println("This part went through");
-            Gui mainGui = new Gui();
-            mainGui.createWindow(access);
-            promptWindow.dispose();
-        }
-    }
-    
 
     //Method to display the prompt/login screen
     public void displayPromptWindow()
@@ -52,15 +38,14 @@ public class LoginGui implements ActionListener
         int promptWindowWidth = (int) (promptScreenDimension.getWidth() - PROMPTSCREENREZ)/2;
 
         //JFrame
-        //------------------------------------------------------------------
+        //--------------------------------------------------------------------
         //JFrame Properties
         promptWindow = new JFrame("Login Window");
         promptWindow.setSize(PROMPTSCREENREZ, PROMPTSCREENREZ/2);
         promptWindow.setLocation(promptWindowWidth, promptWindowHeight);
         promptWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //-------------------------------------------------------------------
+        //---------------------------------------------------------------------
 
-        
         //Panel Creations
         //---------------------------------------------------------------------
             
@@ -76,7 +61,6 @@ public class LoginGui implements ActionListener
             promptMidPanel = new JPanel(new GridLayout(0,3));
             promptBotPanel = new JPanel(new GridLayout(0,3));
        
-        
             //Label Creation
             //------------------------------------------------------------------
             //Prompt Label 
@@ -85,9 +69,6 @@ public class LoginGui implements ActionListener
             promptTopPanel.add(new JLabel(""));
             promptTopPanel.add(prompt);
             //-------------------------------------------------------------------
-
-
-
 
             //Button Creation
             //-------------------------------------------------------------------
@@ -117,7 +98,6 @@ public class LoginGui implements ActionListener
             //login screen labels
             loginErrorLabel = new JLabel("");
 
-
             //login screen text fields
                 //the username textField and its subsequent panel
                 userNameTextField = new JTextField(20);
@@ -128,7 +108,6 @@ public class LoginGui implements ActionListener
                 passwordField = new JPasswordField(20);
                 loginPasswordFieldPanel.add(new JLabel("Password:"));
                 loginPasswordFieldPanel.add(passwordField);
-
 
             //login screen buttons
             
@@ -149,27 +128,18 @@ public class LoginGui implements ActionListener
             loginPanel.add(loginButtonPanel);
             
         //-----------------------------------------------------------------------
-
-
-
-
         //Adding the panels to their parent panel
         promptPanel.add(promptTopPanel);
         promptPanel.add(promptMidPanel);
         promptPanel.add(promptBotPanel);
-
         mainPanel.add(promptPanel, "mainPanelPrompt");
         mainPanel.add(loginPanel, "mainPanelLogin");
-
-
 
         //Adding mainPanel to the loginWindow
         promptWindow.add(mainPanel);
         
         //loginWindow settings
-        promptWindow.setVisible(true);
-
-        
+        promptWindow.setVisible(true);   
     }
 
     //Button actionEvent
@@ -180,20 +150,15 @@ public class LoginGui implements ActionListener
         {
             if(e.getSource() == loginButton)
             {
-                
                 promptScreen = false;
                 cards.show(mainPanel, "mainPanelLogin");
             }
             else if(e.getSource() == guestButton)
             {
-                
-                //open Gui without admin permissions
-                
+                //open Gui without admin permissions  
                 Gui mainGui = new Gui();
                 mainGui.createWindow(false);
                 promptWindow.dispose();
-                
-
                 //goToNextGui(false);
             }
         }
@@ -230,8 +195,8 @@ public class LoginGui implements ActionListener
                     userNameTextField.setText("");
                     passwordField.setText("");
                 }
-
             }
+            //go back to former screen
             else if(e.getSource() == loginScreenBackButton)
             {
                 //sends you back to the prompt panel
